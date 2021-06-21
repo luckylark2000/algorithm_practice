@@ -1,13 +1,15 @@
 package 单链表;
 
-public class IntSLList {
+public class IntSLList {//整数型单链表
 
     protected IntSLLNode head;
     protected IntSLLNode tail;
+    protected int size;
 
     //初始化链表
     public IntSLList() {
         head = tail = null;
+        size=0;
     }
 
     //判断链表是否尾空
@@ -23,6 +25,7 @@ public class IntSLList {
         if (tail == null) {
             tail = head;//这是必须的，因为原本初始化为空的时候head和tail是两个独立空节点。这样就可以保证链表是连续的（头和尾之间是相连的）
         }
+        size=size+1;
     }
 
     //从尾部插入节点
@@ -37,6 +40,7 @@ public class IntSLList {
             tail.next = b;
             tail = tail.next;
         } else head = tail = b;//注意这里一定要写head=tail=b不能单独写一个tail,因为原本head和tail是两个节点，这里如果只写一个就把头和尾割裂开来了
+        size=size+1;
     }
 
     //打印链表
@@ -51,6 +55,7 @@ public class IntSLList {
         if (!isEmpty()) {
             IntSLLNode b = head;
             head = head.next;
+            size=size-1;
             System.out.println("删除的头节点数据为：" + b.data);
         } else System.out.println("链表为空不能进行删除操作");
     }
@@ -72,6 +77,7 @@ public class IntSLList {
                 }
             }
             System.out.println("删除的表尾元素为：" + b);
+            size=size-1;
         } else System.out.println("链表为空不能进行删除操作");
     }
 
@@ -82,6 +88,7 @@ public class IntSLList {
                 if (head.data == e) {
                     head = tail = null;
                     System.out.println("已经将链表中唯一元素" + e + "删除");
+                    size=size-1;
                 } else System.out.println("链表中没有该元素，不能进行删除操作");
 
 
@@ -94,6 +101,7 @@ public class IntSLList {
                     }
                     if (i.next.data == e) {
                         i.next = i.next.next;
+                        size=size-1;
                         flag = 1;
                     }
                 }
@@ -104,7 +112,7 @@ public class IntSLList {
         } else System.out.println("此链表为空，没有任何元素，不能进行删除操作");
     }
 
-    //获取单链表的长度
+    //获取单链表的长度,这一部分已经经过后来添加size成员变量实现，可以忽略
     public int getLength() {
         int j = 0;
         if (head == tail && head != null) {
@@ -146,7 +154,7 @@ public class IntSLList {
 
         if (head == tail && head == null) {
             addToHead(e);
-            System.out.println("成功在第" + n + "位置插入元素：" + e);
+//            System.out.println("成功在第" + n + "位置插入元素：" + e);
             return;
         }
         if (n == 1) {
@@ -162,9 +170,10 @@ public class IntSLList {
             j = j + 1;
             if (j == n - 1) {
                 i.next = new IntSLLNode(e, i.next);
+                size=size+1;
             }
         }
-        System.out.println("成功在第" + n + "个位置插入元素：" + e);
+//        System.out.println("成功在第" + n + "个位置插入元素：" + e);
 
 
     }

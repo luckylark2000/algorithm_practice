@@ -17,4 +17,5 @@ public class Test {
         dlList.delete(dlList.size);
         dlList.printAll();
     }
+
 }
